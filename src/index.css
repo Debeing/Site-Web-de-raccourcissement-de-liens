@@ -1,1 +1,30 @@
 @import "tailwindcss";
+
+input {
+        height: 52px;
+        line-height: 52px;
+        padding: 0 15px;
+        font-size: 20px;
+        font-weight: 300;
+        
+    }
+    button {
+        background-color: #bcbec2;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    button:hover {
+        background-color: #424243;
+    }
+    h1 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
