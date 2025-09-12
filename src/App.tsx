@@ -1,15 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaste } from "@fortawesome/free-solid-svg-icons";
-import { faCopy } from "@fortawesome/free-solid-svg-icons";
+
 
 import "./index.css";
 import { useState } from "react";
 
 function App() {
   const [url, setUrl] = useState("");
-  const handleCopy = () => {
-    navigator.clipboard.writeText(url);
-  }
+  
   const handlePaste = async () => {
     const text = await navigator.clipboard.readText();
     setUrl(text);
