@@ -39,7 +39,7 @@ function App() {
   return (
     <div>
       <nav className="flex d-flex m-5 align-center">
-        <img src="/Logo.png" alt="Logo" className="w-20 h-20" />
+        <img src="/Logo.png" alt="Logo" className="w-30 h-30" />
       </nav>
       <div className="w-200 h-100 eric  mx-auto rounded-lg flex justify-center items-center">
         <div className="">
@@ -72,7 +72,7 @@ function App() {
               placeholder="Votre lien court apparaîtra ici..."
               className="rounded-lg border-2 border-blue-500 focus:border-blue-500 w-80 focus:outline-none pl-10"
             />
-            <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500"
+            <span className="absolute right-2 top-1/2 transform -translate-y-1/2  text-blue-500"
              onClick={handleCopy}>
               <FontAwesomeIcon icon={faCopy} className="cursor-pointer" />
             </span>
