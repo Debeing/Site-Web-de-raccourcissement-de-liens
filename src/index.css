@@ -6,7 +6,7 @@
 .animate-border-gradient {
   border-width: 2px;
   border-style: solid;
-  border-image-source: linear-gradient(90deg, #ec4899, #fbbf24, #8b5cf6);
+  border-image-source: linear-gradient(90deg, #080808, #fbbf24, #151515);
   border-image-slice: 1;
   animation: border-gradient-move 2s linear infinite;
 }

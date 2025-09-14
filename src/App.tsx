@@ -65,7 +65,7 @@ function App() {
       </nav>
       <div className="w-200 h-100 eric mt-[-25px] mx-auto rounded-lg flex justify-center items-center">
         <div className="">
-          <h1 className="text-2xl sm:text-4xl font-bold animate-gradient bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-500 bg-clip-text text-transparent break-words">
+          <h1 className="text-2xl sm:text-4xl font-bold animate-gradient bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-500  break-words">
             Créer un lien court avec son QR code
           </h1>
           <div className="relative">
