@@ -1,23 +1,19 @@
 @keyframes border-gradient-move {
-  0% { border-image-source: linear-gradient(90deg, #ec4899, #fbbf24, #8b5cf6); border-image-slice: 1; }
-  100% { border-image-source: linear-gradient(270deg, #ec4899, #fbbf24, #8b5cf6); border-image-slice: 1; }
+  0% { border-image-source: linear-gradient(90deg, #ec4899, #fbbf24, #8b5cf6);}
+  100% { border-image-source: linear-gradient(270deg, #ec4899, #fbbf24, #8b5cf6);  }
 }
 
 .animate-border-gradient {
   border-width: 2px;
-  border-style: solid;
   border-image-source: linear-gradient(90deg, #080808, #fbbf24, #151515);
   border-image-slice: 1;
-  animation: border-gradient-move 2s linear infinite;
 }
 @keyframes gradient-move {
   0% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
 }
-
 .animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-move 2s linear infinite;
+  background-size: 100% 100%;
 }
 @import "tailwindcss";
 
