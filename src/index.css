@@ -1,20 +1,5 @@
-@keyframes border-gradient-move {
-  0% { border-image-source: linear-gradient(90deg, #ec4899, #fbbf24, #8b5cf6);}
-  100% { border-image-source: linear-gradient(270deg, #ec4899, #fbbf24, #8b5cf6);  }
-}
 
-.animate-border-gradient {
-  border-width: 2px;
-  border-image-source: linear-gradient(90deg, #080808, #fbbf24, #151515);
-  border-image-slice: 1;
-}
-@keyframes gradient-move {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-.animate-gradient {
-  background-size: 100% 100%;
-}
+
 @import "tailwindcss";
 
 input {
@@ -28,12 +13,16 @@ button  {
   color: rgb(51, 49, 49);
   padding: 10px 20px;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
+    cursor: pointer;
+    background-color: rgb(240, 237, 237);
+
 }
 button:hover {
-  background-color: #424243;
+  background-color: #b5b5ba;
 }
+
 h1 {
   font-size: 24px;
   font-weight: 600;

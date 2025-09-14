@@ -35,7 +35,7 @@ function App() {
         body: JSON.stringify({ destination: url }),
       });
       const data = await response.json();
-      setShortUrl(data.shortUrl || "Erreur Rebrandly");
+      setShortUrl(data.shortUrl || "Lien non disponible");
       // 2. Générer le QR code avec logo
       if (data.shortUrl && qrRef.current) {
         qrCodeInstance.current = new QRCodeStyling({
@@ -76,7 +76,7 @@ function App() {
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="Coler votre URL ici...  "
-              className="rounded-lg animate-border-gradient w-150 focus:outline-none pl-10"
+              className="rounded-lg w-150 focus:outline-none pl-10   border-2 border-gray-300 rounded-md"
             />
             <span
               className="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500"
@@ -88,7 +88,7 @@ function App() {
           <div className="w-full max-w-xs mx-auto flex justify-center mt-5">
             <button
               type="button"
-              className="w-full flex justify-center items-center animate-gradient bg-gradient-to-r from-pink-400 via-yellow-400 to-purple-500 bg-clip-text text-transparent border-2 border-purple-400 px-4 py-2 rounded"
+              className=" flex justify-center items-center  px-4 py-2 rounded"
               onClick={handleShorten}
             >
               Raccourcir
@@ -100,7 +100,7 @@ function App() {
               value={shortUrl}
               readOnly
               placeholder="Votre lien court apparaîtra ici..."
-              className="rounded-lg animate-border-gradient w-150 focus:outline-none pl-10"
+              className="rounded-lg  w-150 focus:outline-none pl-10  border-2 border-gray-300 rounded-md"
             />
             <span
               className="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500"
@@ -111,10 +111,10 @@ function App() {
           </div>
           <div className="mt-[-20px] text-center">
             <p className="mt-10">📷 QR Code</p>
-            <div ref={qrRef} className="flex justify-center mt-5" />
+            <div ref={qrRef} className="w-full max-w-xs mx-auto flex justify-center mt-5" />
             {qrCodeInstance.current && (
               <button
-                className="mt-5 animate-gradient bg-gradient-to-r from-pink-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent border-2 border-blue-500 px-4 py-2 rounded"
+                className="flex justify-center items-center  px-4 py-2 rounded mt-5"
                 onClick={() =>
                   qrCodeInstance.current?.download({
                     name: "qr-code",
