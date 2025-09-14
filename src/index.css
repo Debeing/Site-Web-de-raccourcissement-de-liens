@@ -1,49 +1,81 @@
+@keyframes border-gradient-move {
+  0% { border-image-source: linear-gradient(90deg, #ec4899, #fbbf24, #8b5cf6); border-image-slice: 1; }
+  100% { border-image-source: linear-gradient(270deg, #ec4899, #fbbf24, #8b5cf6); border-image-slice: 1; }
+}
+
+.animate-border-gradient {
+  border-width: 2px;
+  border-style: solid;
+  border-image-source: linear-gradient(90deg, #ec4899, #fbbf24, #8b5cf6);
+  border-image-slice: 1;
+  animation: border-gradient-move 3s linear infinite;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-move 3s linear infinite;
+}
 @import "tailwindcss";
 
 input {
-        height: 52px;
-        line-height: 52px;
-        padding: 0 15px;
-        font-size: 20px;
-        font-weight: 300;
-        
-    }
-    button {
-        background-color: #bcbec2;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 8px;
-        font-size: 18px;
-        font-weight: 500;
-    }
-    button:hover {
-        background-color: #424243;
-    }
-    h1 {
-        font-size: 24px;
-        font-weight: 600;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-    body {
-        font-family: 'Poppins', sans-serif;
-    }
-    @media (max-width: 600px) {
-      nav{
-        flex-direction: column;
-        align-items: center;
-      }
-        input {
-            width: 100%;
-            font-size: 12px;
-        }
-        button {
-            width: 100%;
-            font-size: 16px;
-        }
-        .eric{
-            width: 100%;
-            height: auto;
-            padding: 20px;
-        }
-    }
+  height: 52px;
+  line-height: 52px;
+  padding: 0 15px;
+  font-size: 20px;
+  font-weight: 300;
+}
+button  {
+  color: rgb(51, 49, 49);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 500;
+}
+button:hover {
+  background-color: #424243;
+}
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s linear infinite;
+}
+
+.flex.justify-center.mt-5 > canvas {
+  width: 150px;
+  height: 150px ;
+}
+body {
+  font-family: "Poppins", sans-serif;
+}
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  input {
+    width: 100%;
+    font-size: 12px;
+  }
+  button {
+    width: 100%;
+    font-size: 16px;
+  }
+  .eric {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+}

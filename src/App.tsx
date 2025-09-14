@@ -2,24 +2,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaste } from "@fortawesome/free-solid-svg-icons";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
-import { useState, useRef} from "react";
+import { useState, useRef } from "react";
 import QRCodeStyling from "qr-code-styling";
 
-const REBRANDLY_API_KEY = "62d2ff527f494e39af0170f7dfb37817"; 
+const REBRANDLY_API_KEY = "62d2ff527f494e39af0170f7dfb37817";
 
 function App() {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
   const qrRef = useRef<HTMLDivElement>(null);
+  const qrCodeInstance = useRef<QRCodeStyling | null>(null);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shortUrl);
-  }
+  };
 
   const handlePaste = async () => {
     const text = await navigator.clipboard.readText();
     setUrl(text);
-  }
+  };
 
   const handleShorten = async () => {
     if (!url) return;
@@ -28,27 +29,28 @@ function App() {
       const response = await fetch("https://api.rebrandly.com/v1/links", {
         method: "POST",
         headers: {
-          "apikey": REBRANDLY_API_KEY,
-          "Content-Type": "application/json"
+          apikey: REBRANDLY_API_KEY,
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ destination: url })
+        body: JSON.stringify({ destination: url }),
       });
       const data = await response.json();
       setShortUrl(data.shortUrl || "Erreur Rebrandly");
       // 2. Générer le QR code avec logo
       if (data.shortUrl && qrRef.current) {
-        const qrCodeStyling = new QRCodeStyling({
-          width: 150,
-          height: 150,
+        qrCodeInstance.current = new QRCodeStyling({
+          width: 500,
+          height: 500,
           data: data.shortUrl,
           image: "/Logo.png", // Chemin vers ton logo
           dotsOptions: { color: "#090909ff", type: "rounded" },
-          imageOptions: { crossOrigin: "anonymous", margin: 5 }
+          imageOptions: { crossOrigin: "anonymous", margin: 5 },
         });
         qrRef.current.innerHTML = "";
-        qrCodeStyling.append(qrRef.current);
+        qrCodeInstance.current.append(qrRef.current);
       } else if (qrRef.current) {
         qrRef.current.innerHTML = "";
+        qrCodeInstance.current = null;
       }
     } catch {
       setShortUrl("Erreur réseau");
@@ -63,43 +65,64 @@ function App() {
       </nav>
       <div className="w-200 h-100 eric mt-[-25px] mx-auto rounded-lg flex justify-center items-center">
         <div className="">
-          <h1>Créer un lien court</h1>
+          <h1 className="text-4xl font-bold animate-gradient bg-gradient-to-r from-pink-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent">
+            Créer un lien court avec son QR code
+          </h1>
           <div className="relative">
             <input
               type="url"
-               value={url}
+              value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="Coler votre URL ici...  "
-              className="rounded-lg border-2 border-blue-500 focus:border-blue-500 w-80 focus:outline-none pl-10"
+              className="rounded-lg animate-border-gradient w-150 focus:outline-none pl-10"
             />
-            <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500"
-             onClick={handlePaste}>
+            <span
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500"
+              onClick={handlePaste}
+            >
               <FontAwesomeIcon icon={faPaste} className="cursor-pointer" />
             </span>
           </div>
-          <button
-            type="button"
-            className="cursor-pointer flex mt-5"
-            onClick={handleShorten}
-          >
-            Raccourcir
-          </button>
+          <div className="flex justify-center mt-5">
+            <button
+              type="button"
+              className="cursor-pointer flex mt-5 animate-gradient bg-gradient-to-r from-pink-400 via-yellow-400 to-purple-500 bg-clip-text text-transparent border-2 border-purple-400 px-4 py-2 rounded"
+              onClick={handleShorten}
+            >
+              Raccourcir
+            </button>
+          </div>
           <div className="relative mt-5">
             <input
               type="text"
               value={shortUrl}
               readOnly
               placeholder="Votre lien court apparaîtra ici..."
-              className="rounded-lg border-2 border-blue-500 focus:border-blue-500 w-80 focus:outline-none pl-10"
+              className="rounded-lg animate-border-gradient w-150 focus:outline-none pl-10"
             />
-            <span className="absolute right-2 top-1/2 transform -translate-y-1/2  text-blue-500"
-             onClick={handleCopy}>
+            <span
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500"
+              onClick={handleCopy}
+            >
               <FontAwesomeIcon icon={faCopy} className="cursor-pointer" />
             </span>
           </div>
           <div className="mt-[-20px] text-center">
-            <p className="mt-10">📷 QR Code avec logo</p>
+            <p className="mt-10">📷 QR Code</p>
             <div ref={qrRef} className="flex justify-center mt-5" />
+            {qrCodeInstance.current && (
+              <button
+                className="mt-5 animate-gradient bg-gradient-to-r from-pink-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent border-2 border-blue-500 px-4 py-2 rounded"
+                onClick={() =>
+                  qrCodeInstance.current?.download({
+                    name: "qr-code",
+                    extension: "png",
+                  })
+                }
+              >
+                Télécharger le QR Code
+              </button>
+            )}
           </div>
         </div>
       </div>
