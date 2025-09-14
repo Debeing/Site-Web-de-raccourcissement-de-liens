@@ -65,7 +65,7 @@ function App() {
       </nav>
       <div className="w-200 h-100 eric mt-[-25px] mx-auto rounded-lg flex justify-center items-center">
         <div className="">
-          <h1 className="text-4xl font-bold animate-gradient bg-gradient-to-r from-pink-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent">
+          <h1 className="text-2xl sm:text-4xl font-bold animate-gradient bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-500 bg-clip-text text-transparent break-words">
             Créer un lien court avec son QR code
           </h1>
           <div className="relative">
@@ -83,10 +83,10 @@ function App() {
               <FontAwesomeIcon icon={faPaste} className="cursor-pointer" />
             </span>
           </div>
-          <div className="flex justify-center mt-5">
+          <div className="w-full max-w-xs mx-auto flex justify-center mt-5">
             <button
               type="button"
-              className="cursor-pointer flex mt-5 animate-gradient bg-gradient-to-r from-pink-400 via-yellow-400 to-purple-500 bg-clip-text text-transparent border-2 border-purple-400 px-4 py-2 rounded"
+              className="w-full flex justify-center items-center animate-gradient bg-gradient-to-r from-pink-400 via-yellow-400 to-purple-500 bg-clip-text text-transparent border-2 border-purple-400 px-4 py-2 rounded"
               onClick={handleShorten}
             >
               Raccourcir

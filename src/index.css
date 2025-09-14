@@ -8,7 +8,7 @@
   border-style: solid;
   border-image-source: linear-gradient(90deg, #ec4899, #fbbf24, #8b5cf6);
   border-image-slice: 1;
-  animation: border-gradient-move 3s linear infinite;
+  animation: border-gradient-move 2s linear infinite;
 }
 @keyframes gradient-move {
   0% { background-position: 0% 50%; }
@@ -17,7 +17,7 @@
 
 .animate-gradient {
   background-size: 200% 200%;
-  animation: gradient-move 3s linear infinite;
+  animation: gradient-move 2s linear infinite;
 }
 @import "tailwindcss";
 
