@@ -114,7 +114,7 @@ function App() {
             <div ref={qrRef} className="w-full max-w-xs mx-auto flex justify-center mt-5" />
             {qrCodeInstance.current && (
               <button
-                className="flex justify-center items-center  px-4 py-2 rounded mt-5"
+                className="flex justify-center items-center dame px-4 py-2 rounded mt-5"
                 onClick={() =>
                   qrCodeInstance.current?.download({
                     name: "qr-code",
