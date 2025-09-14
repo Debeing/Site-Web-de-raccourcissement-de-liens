@@ -2,11 +2,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaste } from "@fortawesome/free-solid-svg-icons";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
-import { useState } from "react";
+import { useState, useRef} from "react";
+import QRCodeStyling from "qr-code-styling";
+
+const REBRANDLY_API_KEY = "62d2ff527f494e39af0170f7dfb37817"; 
 
 function App() {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
+  const qrRef = useRef<HTMLDivElement>(null);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shortUrl);
@@ -17,31 +21,47 @@ function App() {
     setUrl(text);
   }
 
-  const BITLY_TOKEN = "d23aacfad3d3dbfd4ed81cb0a1ef7f4484e0cdce"; 
   const handleShorten = async () => {
     if (!url) return;
     try {
-      const response = await fetch("https://api-ssl.bitly.com/v4/shorten", {
+      // 1. Générer le lien court Rebrandly
+      const response = await fetch("https://api.rebrandly.com/v1/links", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${BITLY_TOKEN}`,
+          "apikey": REBRANDLY_API_KEY,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ long_url: url })
+        body: JSON.stringify({ destination: url })
       });
       const data = await response.json();
-      setShortUrl(data.link || "Erreur Bitly");
+      setShortUrl(data.shortUrl || "Erreur Rebrandly");
+      // 2. Générer le QR code avec logo
+      if (data.shortUrl && qrRef.current) {
+        const qrCodeStyling = new QRCodeStyling({
+          width: 150,
+          height: 150,
+          data: data.shortUrl,
+          image: "/Logo.png", // Chemin vers ton logo
+          dotsOptions: { color: "#090909ff", type: "rounded" },
+          imageOptions: { crossOrigin: "anonymous", margin: 5 }
+        });
+        qrRef.current.innerHTML = "";
+        qrCodeStyling.append(qrRef.current);
+      } else if (qrRef.current) {
+        qrRef.current.innerHTML = "";
+      }
     } catch {
       setShortUrl("Erreur réseau");
+      if (qrRef.current) qrRef.current.innerHTML = "";
     }
-  }
+  };
 
   return (
     <div>
       <nav className="flex d-flex m-5 align-center">
         <img src="/Logo.png" alt="Logo" className="w-30 h-30" />
       </nav>
-      <div className="w-200 h-100 eric  mx-auto rounded-lg flex justify-center items-center">
+      <div className="w-200 h-100 eric mt-[-25px] mx-auto rounded-lg flex justify-center items-center">
         <div className="">
           <h1>Créer un lien court</h1>
           <div className="relative">
@@ -76,6 +96,10 @@ function App() {
              onClick={handleCopy}>
               <FontAwesomeIcon icon={faCopy} className="cursor-pointer" />
             </span>
+          </div>
+          <div className="mt-[-20px] text-center">
+            <p className="mt-10">📷 QR Code avec logo</p>
+            <div ref={qrRef} className="flex justify-center mt-5" />
           </div>
         </div>
       </div>
